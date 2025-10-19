@@ -26,4 +26,8 @@ npm install -g @openai/codex@latest
 echo "Updating Gemini CLI..."
 npm install -g @google/gemini-cli@latest
 
+# Update Copilot CLI (assuming installation via npm)
+echo "Updating Copilot CLI..."
+npm install -g @github/copilot@latest
+
 echo "AI CLI update process completed."

@@ -21,6 +21,7 @@ The scripts currently update the following CLIs:
 -   **GitHub Copilot CLI** (`@github/copilot`)
 -   **Codex CLI** (`@openai/codex`)
 -   **Gemini CLI** (`@google/gemini`)
+-   **Copilot CLI** (`@github/copilot`)
 
 ## ⚙️ Prerequisites
 

@@ -22,5 +22,9 @@ echo Updating Gemini CLI...
 npm install -g @google/gemini-cli@latest
 
 echo.
+echo Updating Copilot CLI...
+npm install -g @github/copilot@latest
+
+echo.
 echo AI CLI update process completed.
 pause
