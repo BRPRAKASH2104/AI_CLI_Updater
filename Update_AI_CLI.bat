@@ -18,8 +18,8 @@ echo Updating Codex CLI...
 npm install -g @openai/codex@latest
 
 echo.
-echo Updating Google CLI...
-gcloud components update
+echo Updating Gemini CLI...
+npm install -g @google/gemini-cli@latest
 
 echo.
 echo AI CLI update process completed.

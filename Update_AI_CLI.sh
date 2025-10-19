@@ -22,8 +22,8 @@ npm install -g @openai/codex@latest
 # If installed via Homebrew:
 # brew upgrade codex
 
-# Update Google CLI (gcloud)
-echo "Updating Google CLI..."
-gcloud components update
+# Update Gemini CLI (assuming installation via npm)
+echo "Updating Gemini CLI..."
+npm install -g @google/gemini-cli@latest
 
 echo "AI CLI update process completed."

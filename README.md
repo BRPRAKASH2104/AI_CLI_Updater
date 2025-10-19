@@ -20,7 +20,7 @@ The scripts currently update the following CLIs:
 -   **Claude CLI** (`@anthropic-ai/claude-code`)
 -   **GitHub Copilot CLI** (`@github/copilot`)
 -   **Codex CLI** (`@openai/codex`)
--   **Google CLI** (`gcloud`)
+-   **Gemini CLI** (`@google/gemini`)
 
 ## ⚙️ Prerequisites
 
