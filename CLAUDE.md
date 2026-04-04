@@ -11,6 +11,16 @@ This is a simple automation utility that updates multiple AI CLI tools with a si
 
 Both scripts update npm and 4 AI CLIs: Claude Code, GitHub Copilot, OpenAI Codex, and Google Gemini.
 
+### Current npm Packages
+
+| Step | Tool | npm Package |
+|------|------|-------------|
+| 1/5 | npm | `npm` |
+| 2/5 | Claude Code | `@anthropic-ai/claude-code` |
+| 3/5 | GitHub Copilot CLI | `@github/copilot` |
+| 4/5 | OpenAI Codex | `@openai/codex` |
+| 5/5 | Google Gemini CLI | `@google/gemini-cli` |
+
 ## Architecture
 
 ### Script Design Philosophy
@@ -53,6 +63,8 @@ Color scheme (identical in both scripts):
 - Yellow: Progress numbers [X/5]
 - Green: Success messages and checkmarks
 - Bold: Tool names
+
+`MAGENTA` and `RED` are defined in `Update_AI_CLI.sh` but currently unused — available for future error/warning states.
 
 ## Common Tasks
 
