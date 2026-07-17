@@ -87,22 +87,25 @@ brew update
 echo -e "${GREEN}✓ Homebrew update completed${NC}"
 echo ""
 
-# Update GitNexus
-echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[8/9]${NC} ${BOLD}Updating GitNexus...${NC}"
-echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-npm install -g gitnexus --loglevel=error --allow-scripts=gitnexus,@ladybugdb/core,@scarf/scarf,tree-sitter,tree-sitter-c-sharp,tree-sitter-cpp,tree-sitter-go,tree-sitter-java,tree-sitter-javascript,tree-sitter-php,tree-sitter-python,tree-sitter-ruby,tree-sitter-rust,tree-sitter-typescript
-export GITNEXUS_MAX_FILE_SIZE=2048
-gitnexus analyze /Users/ramprakash/Documents/GitHub/AI_TC_Generator_v04_w_Trainer --force --skills
-echo -e "${GREEN}✓ GitNexus update completed${NC}"
-echo ""
-
 # Update Mole
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[9/9]${NC} ${BOLD}Updating Mole...${NC}"
+echo -e "${YELLOW}[8/9]${NC} ${BOLD}Updating Mole...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 mole update
 echo -e "${GREEN}✓ Mole update completed${NC}"
+echo ""
+
+# Update GitNexus
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${YELLOW}[9/9]${NC} ${BOLD}Updating GitNexus...${NC}"
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+npm install -g gitnexus --loglevel=error --allow-scripts=gitnexus,@ladybugdb/core,@scarf/scarf,tree-sitter,tree-sitter-c-sharp,tree-sitter-cpp,tree-sitter-go,tree-sitter-java,tree-sitter-javascript,tree-sitter-php,tree-sitter-python,tree-sitter-ruby,tree-sitter-rust,tree-sitter-typescript
+export GITNEXUS_MAX_FILE_SIZE=2048
+cd  /Users/ramprakash/Documents/GitHub/AI_TC_Generator_v04_w_Trainer
+pwd
+gitnexus clean --force
+gitnexus analyze --force --skills
+echo -e "${GREEN}✓ GitNexus update completed${NC}"
 echo ""
 
 # Completion message
