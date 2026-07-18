@@ -109,7 +109,7 @@ echo ""
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${YELLOW}[10/10]${NC} ${BOLD}Updating Graphify...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-pip3 install --upgrade graphifyy
+uv tool install graphifyy
 echo -e "${GREEN}✓ Graphify update completed${NC}"
 echo ""
 
