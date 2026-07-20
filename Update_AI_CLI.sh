@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Header
 echo ""
 echo -e "${BOLD}${CYAN}╔══════════════════════════════════════════════╗${NC}"
-echo -e "${BOLD}${CYAN}║     AI CLI Updater - Starting Process...    ║${NC}"
+echo -e "${BOLD}${CYAN}║     AI CLI Updater - Starting Process...     ║${NC}"
 echo -e "${BOLD}${CYAN}╚══════════════════════════════════════════════╝${NC}"
 echo ""
 
@@ -101,7 +101,7 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 echo -e "${YELLOW}[9/10]${NC} ${BOLD}Updating GitNexus...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g gitnexus --loglevel=error --allow-scripts=gitnexus,@ladybugdb/core,@scarf/scarf,tree-sitter,tree-sitter-c-sharp,tree-sitter-cpp,tree-sitter-go,tree-sitter-java,tree-sitter-javascript,tree-sitter-php,tree-sitter-python,tree-sitter-ruby,tree-sitter-rust,tree-sitter-typescript
-export GITNEXUS_MAX_FILE_SIZE=2048
+export GITNEXUS_MAX_FILE_SIZE=4096
 echo -e "${GREEN}✓ GitNexus update completed${NC}"
 echo ""
 
@@ -110,6 +110,8 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 echo -e "${YELLOW}[10/10]${NC} ${BOLD}Updating Graphify...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 uv tool install graphifyy
+graphify install --platform claude
+graphify install --platform codex
 echo -e "${GREEN}✓ Graphify update completed${NC}"
 echo ""
 
@@ -122,6 +124,8 @@ pwd
 gitnexus clean --force
 gitnexus analyze --force --skills
 graphify install --project
+graphify install --project --platform claude
+graphify install --project --platform codex
 graphify update
 echo -e "${GREEN}✓ Project update completed${NC}"
 echo ""
