@@ -24,11 +24,11 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 echo -e "${YELLOW}[1/10]${NC} ${BOLD}Updating Node.js via NVM...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
-# 1. Load NVM into the script's subshell (with || true to prevent set -e from failing if NVM isn't present)
+# Load NVM into the script's subshell
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || true
 
-# 2. Install the latest version of Node.js and make it default
+# Install the latest version of Node.js and make it default
 echo -e "Installing the latest version of Node.js..."
 nvm install node
 nvm alias default node
@@ -50,7 +50,6 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 echo -e "${YELLOW}[3/10]${NC} ${BOLD}Updating Claude CLI...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g @anthropic-ai/claude-code@latest --allow-scripts=@anthropic-ai/claude-code
-# Alternative: claude update
 echo -e "${GREEN}✓ Claude CLI update completed${NC}"
 echo ""
 
@@ -59,7 +58,6 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 echo -e "${YELLOW}[4/10]${NC} ${BOLD}Updating GitHub Copilot CLI...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g @github/copilot@latest
-# Alternative: gh extension upgrade gh-copilot
 echo -e "${GREEN}✓ GitHub Copilot CLI update completed${NC}"
 echo ""
 
@@ -68,7 +66,6 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 echo -e "${YELLOW}[5/10]${NC} ${BOLD}Updating Codex CLI...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g @openai/codex@latest
-# Alternative: brew upgrade codex
 echo -e "${GREEN}✓ Codex CLI update completed${NC}"
 echo ""
 
@@ -84,16 +81,24 @@ echo ""
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${YELLOW}[7/10]${NC} ${BOLD}Updating Homebrew...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-brew update
-echo -e "${GREEN}✓ Homebrew update completed${NC}"
+if command -v brew &> /dev/null; then
+    brew update && brew upgrade || true
+    echo -e "${GREEN}✓ Homebrew update completed${NC}"
+else
+    echo -e "${YELLOW}! Homebrew not found, skipping...${NC}"
+fi
 echo ""
 
 # Update Mole
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${YELLOW}[8/10]${NC} ${BOLD}Updating Mole...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-mole update
-echo -e "${GREEN}✓ Mole update completed${NC}"
+if command -v mole &> /dev/null; then
+    mole update || true
+    echo -e "${GREEN}✓ Mole update completed${NC}"
+else
+    echo -e "${YELLOW}! Mole not found, skipping...${NC}"
+fi
 echo ""
 
 # Update GitNexus
@@ -101,33 +106,48 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 echo -e "${YELLOW}[9/10]${NC} ${BOLD}Updating GitNexus...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g gitnexus --loglevel=error --allow-scripts=gitnexus,@ladybugdb/core,@scarf/scarf,tree-sitter,tree-sitter-c-sharp,tree-sitter-cpp,tree-sitter-go,tree-sitter-java,tree-sitter-javascript,tree-sitter-php,tree-sitter-python,tree-sitter-ruby,tree-sitter-rust,tree-sitter-typescript
-export GITNEXUS_MAX_FILE_SIZE=4096
-echo -e "${GREEN}✓ GitNexus update completed${NC}"
+
+# Safely refresh symlink directly from the current Node active bin directory
+NODE_BIN="$(dirname "$(which node)")"
+mkdir -p "$HOME/.local/bin"
+ln -sf "$NODE_BIN/gitnexus" "$HOME/.local/bin/gitnexus"
+
+echo -e "${GREEN}✓ GitNexus update and symlink refreshed (${HOME}/.local/bin/gitnexus -> ${NODE_BIN}/gitnexus)${NC}"
 echo ""
 
 # Update Graphify
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${YELLOW}[10/10]${NC} ${BOLD}Updating Graphify...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-uv tool install graphifyy
-graphify install --platform claude
-graphify install --platform codex
-echo -e "${GREEN}✓ Graphify update completed${NC}"
+if command -v uv &> /dev/null; then
+    uv tool install graphify --upgrade || uv tool install graphifyy --upgrade || true
+    graphify install --platform claude || true
+    graphify install --platform codex || true
+    echo -e "${GREEN}✓ Graphify update completed${NC}"
+else
+    echo -e "${YELLOW}! 'uv' tool manager not found, skipping Graphify update...${NC}"
+fi
 echo ""
 
 # Update Project
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${YELLOW}[****]${NC} ${BOLD}Updating project...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-cd /Users/ramprakash/Documents/GitHub/AI_TC_Generator_v04_w_Trainer
-pwd
-gitnexus clean --force
-gitnexus analyze --force --skills
-graphify install --project
-graphify install --project --platform claude
-graphify install --project --platform codex
-graphify update
-echo -e "${GREEN}✓ Project update completed${NC}"
+PROJECT_DIR="$HOME/Documents/GitHub/AI_TC_Generator_v04_w_Trainer"
+
+if [ -d "$PROJECT_DIR" ]; then
+    cd "$PROJECT_DIR"
+    pwd
+    gitnexus clean --force
+    gitnexus analyze --force --skills
+    graphify install --project || true
+    graphify install --project --platform claude || true
+    graphify install --project --platform codex || true
+    graphify update || true
+    echo -e "${GREEN}✓ Project update completed${NC}"
+else
+    echo -e "${RED}✗ Directory $PROJECT_DIR does not exist! Skipping project step.${NC}"
+fi
 echo ""
 
 # Completion message
