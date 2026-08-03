@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -ex # 'e' halts on errors, 'x' prints commands as they run
+set -e # Exit immediately if a command exits with a non-zero status.
+#set -ex # 'e' halts on errors, 'x' prints commands as they run
 
 # Automatically log everything to a file in the script's directory
 exec &> >(tee -a "$(dirname "$0")/update_cli_$(date +%Y-%m-%d_%H-%M).log")
@@ -24,7 +25,7 @@ echo ""
 
 # Update Node.js via NVM
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[1/10]${NC} ${BOLD}Updating Node.js via NVM...${NC}"
+echo -e "${YELLOW}[1/11]${NC} ${BOLD}Updating Node.js via NVM...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
 # Load NVM into the script's subshell
@@ -42,7 +43,7 @@ echo ""
 
 # Update NPM
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[2/10]${NC} ${BOLD}Updating NPM...${NC}"
+echo -e "${YELLOW}[2/11]${NC} ${BOLD}Updating NPM...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g npm@latest
 echo -e "${GREEN}✓ NPM update completed${NC}"
@@ -50,7 +51,7 @@ echo ""
 
 # Update Claude CLI
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[3/10]${NC} ${BOLD}Updating Claude CLI...${NC}"
+echo -e "${YELLOW}[3/11]${NC} ${BOLD}Updating Claude CLI...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g @anthropic-ai/claude-code@latest --allow-scripts=@anthropic-ai/claude-code
 echo -e "${GREEN}✓ Claude CLI update completed${NC}"
@@ -58,7 +59,7 @@ echo ""
 
 # Update GitHub Copilot CLI
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[4/10]${NC} ${BOLD}Updating GitHub Copilot CLI...${NC}"
+echo -e "${YELLOW}[4/11]${NC} ${BOLD}Updating GitHub Copilot CLI...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g @github/copilot@latest
 echo -e "${GREEN}✓ GitHub Copilot CLI update completed${NC}"
@@ -66,7 +67,7 @@ echo ""
 
 # Update Codex CLI
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[5/10]${NC} ${BOLD}Updating Codex CLI...${NC}"
+echo -e "${YELLOW}[5/11]${NC} ${BOLD}Updating Codex CLI...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g @openai/codex@latest
 echo -e "${GREEN}✓ Codex CLI update completed${NC}"
@@ -74,7 +75,7 @@ echo ""
 
 # Update Gemini CLI
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[6/10]${NC} ${BOLD}Updating Gemini CLI...${NC}"
+echo -e "${YELLOW}[6/11]${NC} ${BOLD}Updating Gemini CLI...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g @google/gemini-cli@latest --allow-scripts=@github/keytar,node-pty
 echo -e "${GREEN}✓ Gemini CLI update completed${NC}"
@@ -82,7 +83,7 @@ echo ""
 
 # Update Homebrew
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[7/10]${NC} ${BOLD}Updating Homebrew...${NC}"
+echo -e "${YELLOW}[7/11]${NC} ${BOLD}Updating Homebrew...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 if command -v brew &> /dev/null; then
     brew update && brew upgrade
@@ -94,7 +95,7 @@ echo ""
 
 # Update Mole
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[8/10]${NC} ${BOLD}Updating Mole...${NC}"
+echo -e "${YELLOW}[8/11]${NC} ${BOLD}Updating Mole...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 if command -v mole &> /dev/null; then
     mole update
@@ -106,7 +107,7 @@ echo ""
 
 # Update GitNexus
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[9/10]${NC} ${BOLD}Updating GitNexus...${NC}"
+echo -e "${YELLOW}[9/11]${NC} ${BOLD}Updating GitNexus...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 npm install -g gitnexus --loglevel=error --allow-scripts=gitnexus,@ladybugdb/core,@scarf/scarf,tree-sitter,tree-sitter-c-sharp,tree-sitter-cpp,tree-sitter-go,tree-sitter-java,tree-sitter-javascript,tree-sitter-php,tree-sitter-python,tree-sitter-ruby,tree-sitter-rust,tree-sitter-typescript
 
@@ -119,7 +120,7 @@ echo ""
 
 # Update Graphify
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${YELLOW}[10/10]${NC} ${BOLD}Updating Graphify...${NC}"
+echo -e "${YELLOW}[10/11]${NC} ${BOLD}Updating Graphify...${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 if command -v uv &> /dev/null; then
     # Fallback pattern captures the graphifyy naming edge-case smoothly
@@ -131,6 +132,18 @@ if command -v uv &> /dev/null; then
     grep "GITNEXUS_MAX_FILE_SIZE" ~/.zshrc
 else
     echo -e "${YELLOW}! 'uv' tool manager not found, skipping Graphify update...${NC}"
+fi
+echo ""
+
+# Update PIP
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${YELLOW}[11/11]${NC} ${BOLD}Updating PIP...${NC}"
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+if command -v python3 &> /dev/null; then
+    python3 -m pip install --upgrade pip
+    echo -e "${GREEN}✓ PIP update completed${NC}"
+else
+    echo -e "${YELLOW}! python3 not found, skipping PIP update...${NC}"
 fi
 echo ""
 
